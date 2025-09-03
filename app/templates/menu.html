@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <title>Dashboard | WK</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Header fixo -->
+    <header id="menu_superior">
+        <div class="header-content">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Ajuda</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <div id="container">
+        <div id="conteudo">
+            <h1>Bem-vindo ao Painel de Controle</h1>
+            <p>Escolha uma das opções abaixo:</p>
+
+            
+            <div class="icone">
+                {% if current_user.user_admin %}
+                    <a href="/usuarios" class="card">
+                        <img src="{{ url_for('static', filename='images/icon_users.svg') }}" alt="Usuários">
+                        <span>Gerenciar Usuários</span>
+                    </a>
+
+                    <a href="/relatorios" class="card">
+                        <img src="{{ url_for('static', filename='images/icon_reports.svg') }}" alt="Relatórios">
+                        <span>Relatórios</span>
+                    </a>
+                {% endif %}
+
+                <a href="/produtos" class="card">
+                    <img src="{{ url_for('static', filename='images/icon_new_products.svg') }}" alt="Produtos">
+                    <span>Cadastrar Produto</span>
+                </a>
+
+                <a href="/produtos/novo" class="card">
+                    <img src="{{ url_for('static', filename='images/icon_edit.svg') }}" alt="Cadastrar Produto">
+                    <span>Gerenciar Produtos</span>
+                </a>
+
+                <a href="/logout" class="card">
+                    <img src="{{ url_for('static', filename='images/icon_logout.svg')}}" alt="Sair">
+                    <span>Sair</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

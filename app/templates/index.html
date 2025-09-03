@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="conteudo">
+        <form action="" method="post" class="formulario">
+            <h3>Faça seu login</h3>
+            {{ form.csrf_token }}
+            
+            {{ form.login_nome.label() }}
+            {{ form.login_nome(class="form-control") }}
+            
+            {{ form.senha.label() }}
+            {{ form.senha(class="form-control") }}
+
+            {{ form.btnSubmit(class="btn btn-primary col-12 mt-3") }}
+
+        
+        </form>
+    </div>
+{% endblock %}

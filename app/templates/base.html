@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <title>Controle de Estoque | WK</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header id="menu_superior">
+        <div class="header-content">
+            <a href="/"> 
+                <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
+            </a>
+            <nav>
+                <ul class="nav_header">
+                    <li><a href="{{ url_for('wk') }}">Sobre Nós</a></li>
+                    <li><a href="{{ url_for('ajuda') }}">Ajuda</a></li>   
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

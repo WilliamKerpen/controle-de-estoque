@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="formulario">
+        <h2>Lista de Produtos</h2>
+        <ul>
+            {% for produto in produtos %}
+                <li class="{% if produto.quantidade < produto.quantidade_minima %}alerta{% endif %}">
+                    {{ produto.nome }} - {{ produto.quantidade }} unidades 
+                    (mínimo: {{ produto.quantidade_minima }})
+                </li>
+            {% else %}
+                <li>Nenhum produto cadastrado.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
