@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="formulario">
+    <h2>Editar Produto: {{ produto.nome }}</h2>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <label>{{ form.nome.label }}</label>
+        {{ form.nome() }}
+
+        <label>{{ form.quantidade.label }}</label>
+        {{ form.quantidade() }}
+
+        <label>{{ form.quantidade_minima.label }}</label>
+        {{ form.quantidade_minima() }}
+
+        <label>{{ form.descricao.label }}</label>
+        {{ form.descricao() }}
+
+        {{ form.btnSubmit(class="botao") }}
+        <a href="{{ url_for('produtos') }}" class="btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

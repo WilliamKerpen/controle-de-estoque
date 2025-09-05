@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="formulario">
+    <h2>Adicionar Estoque: {{ produto.nome }}</h2>
+
+    <form method="POST">
+        <label for="quantidade_adicional">Quantidade a adicionar:</label>
+        <input type="number" name="quantidade_adicional" min="1" required>
+
+        <button type="submit" class="botao">Adicionar</button>
+        <a href="{{ url_for('produtos') }}" class="btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

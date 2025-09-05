@@ -1,61 +1,55 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <title>Dashboard | WK</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <!-- Header fixo -->
-    <header id="menu_superior">
-        <div class="header-content">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
-            <nav>
-                <ul>
-                    <li><a href="#">Sobre Nós</a></li>
-                    <li><a href="#">Ajuda</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+{% extends 'base.html' %}
 
-    <!-- Conteúdo principal -->
-    <div id="container">
-        <div id="conteudo">
-            <h1>Bem-vindo ao Painel de Controle</h1>
-            <p>Escolha uma das opções abaixo:</p>
+{% block content %}
+<div class="dashboard">
+    <h1>Bem-vindo {{ current_user.login_nome }}, ao Painel de Controle</h1>
+    <p>Escolha uma das opções abaixo:</p>
 
-            
-            <div class="icone">
-                {% if current_user.user_admin %}
-                    <a href="/usuarios" class="card">
-                        <img src="{{ url_for('static', filename='images/icon_users.svg') }}" alt="Usuários">
-                        <span>Gerenciar Usuários</span>
-                    </a>
+    <div class="dashboard-grid">
+        {% if current_user.admin %}
+            <a href="{{ url_for('gerenciar_usuarios') }}" class="dashboard-card">
+                <img src="{{ url_for('static', filename='images/icon_users.svg') }}" alt="Usuários">
+                <span>Gerenciar Usuários</span>
+            </a>
 
-                    <a href="/relatorios" class="card">
-                        <img src="{{ url_for('static', filename='images/icon_reports.svg') }}" alt="Relatórios">
-                        <span>Relatórios</span>
-                    </a>
-                {% endif %}
+            <a href="{{ url_for('ver_logs') }}" class="dashboard-card">
+                <img src="{{ url_for('static', filename='images/icon_reports.svg') }}" alt="Relatórios">
+                <span>Ver Logs</span>
+            </a>
+        {% endif %}
 
-                <a href="/produtos" class="card">
-                    <img src="{{ url_for('static', filename='images/icon_new_products.svg') }}" alt="Produtos">
-                    <span>Cadastrar Produto</span>
-                </a>
+        <a href="{{ url_for('cadastrar_produto') }}" class="dashboard-card">
+            <img src="{{ url_for('static', filename='images/icon_new_products.svg') }}" alt="Novo Produto">
+            <span>Novo Produto</span>
+        </a>
 
-                <a href="/produtos/novo" class="card">
-                    <img src="{{ url_for('static', filename='images/icon_edit.svg') }}" alt="Cadastrar Produto">
-                    <span>Gerenciar Produtos</span>
-                </a>
+        <a href="{{ url_for('produtos') }}" class="dashboard-card">
+            <img src="{{ url_for('static', filename='images/icon_reports.svg') }}" alt="Produtos em Estoque">
+            <span>Produtos em Estoque</span>
+        </a>
 
-                <a href="/logout" class="card">
-                    <img src="{{ url_for('static', filename='images/icon_logout.svg')}}" alt="Sair">
-                    <span>Sair</span>
-                </a>
-            </div>
-        </div>
+        <a href="{{ url_for('produtos') }}" class="dashboard-card">
+            <img src="{{ url_for('static', filename='images/icon_add.svg') }}" alt="Entrada">
+            <span>Entrada de Produtos</span>
+        </a>
+
+        <a href="{{ url_for('produtos') }}" class="dashboard-card">
+            <img src="{{ url_for('static', filename='images/icon_remove.svg') }}" alt="Saída">
+            <span>Saída de Produtos</span>
+        </a>
     </div>
-</body>
-</html>
+    {% if produtos_alerta %}
+    <div class="alerta-estoque">
+        <h2>⚠️ Produtos com Estoque Baixo</h2>
+        <ul>
+            {% for produto in produtos_alerta %}
+                <li class="alerta">
+                    {{ produto.nome }} — {{ produto.quantidade }} unidades (mínimo: {{ produto.quantidade_minima }})
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+</div>
+{% endblock %}

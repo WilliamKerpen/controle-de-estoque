@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %} 
+    
+    <div class="formulario">       
+
+        <h2>Editar Usuário</h2>
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div>{{ form.nome.label }} {{ form.nome() }}</div>
+            <div>{{ form.sobrenome.label }} {{ form.sobrenome() }}</div>
+            <div>{{ form.login_nome.label }} {{ form.login_nome() }}</div>
+            <div>{{ form.senha.label }} {{ form.senha() }}</div>
+            <div>{{ form.confirmacao_senha.label }} {{ form.confirmacao_senha() }}</div>
+            <div>{{ form.admin.label }} {{ form.admin() }}</div>
+            <div>{{ form.btnSubmit() }}</div>
+        </form>
+
+    </div>
+    
+{% endblock %}

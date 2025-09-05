@@ -1,16 +1,46 @@
 {% extends 'base.html' %}
+
 {% block content %}
-    <div class="formulario">
-        <h2>Lista de Produtos</h2>
-        <ul>
+<a href="{{ url_for('cadastrar_produto') }}" class="botao novo-produto">Novo Produto</a>
+
+<div class="formulario">
+    <h2>Produtos em Estoque</h2>
+
+    <!-- Formulário de busca -->
+    <form method="GET" action="{{ url_for('produtos') }}">
+        <label for="busca">Buscar produto:</label>
+        <input type="text" name="busca" id="busca" placeholder="Digite o nome do produto">
+        <button type="submit" class="botao">Buscar</button>
+    </form>
+
+    <hr>
+
+    <!-- Tabela de produtos -->
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th>Qtd. Mínima</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
             {% for produto in produtos %}
-                <li class="{% if produto.quantidade < produto.quantidade_minima %}alerta{% endif %}">
-                    {{ produto.nome }} - {{ produto.quantidade }} unidades 
-                    (mínimo: {{ produto.quantidade_minima }})
-                </li>
-            {% else %}
-                <li>Nenhum produto cadastrado.</li>
+            <tr>
+                <td>{{ produto.nome }}</td>
+                <td>{{ produto.quantidade }}</td>
+                <td>{{ produto.quantidade_minima }}</td>
+                <td>{{ produto.descricao[:25] }}{{ '...' if produto.descricao|length > 25 else '' }}</td>
+                <td>
+                    <a href="{{ url_for('adicionar_produto', id=produto.id) }}" class="btn-secondary">Adicionar</a>
+                    <a href="{{ url_for('retirar_produto', id=produto.id) }}" class="btn-secondary">Retirar</a>
+                    <a href="{{ url_for('editar_produto', id=produto.id) }}" class="btn-secondary">Editar</a>
+                </td>
+            </tr>
             {% endfor %}
-        </ul>
-    </div>
+        </tbody>
+    </table>
+</div>
 {% endblock %}

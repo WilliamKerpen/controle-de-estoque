@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %} 
+    
+    <div class="formulario">       
+
+        <h2>Logs de Alterações</h2>
+        <table class = "tabela">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Campo</th>
+                    <th>De</th>
+                    <th>Para</th>
+                    <th>Usuário</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in logs %}
+                <tr>
+                    <td>{{ log.produto.nome }}</td>
+                    <td>{{ log.campo_alterado }}</td>
+                    <td>{{ log.valor_antigo }}</td>
+                    <td>{{ log.valor_novo }}</td>
+                    <td>{{ log.usuario.login_nome }}</td>
+                    <td>{{ log.data_alteracao.strftime('%d/%m/%Y %H:%M') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+    
+{% endblock %}

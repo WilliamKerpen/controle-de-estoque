@@ -1,19 +1,49 @@
 {% extends 'base.html' %}
+
 {% block content %}
-    <div class="conteudo">
-        <form action="" method="post" class="formulario">
-            <h3>Faça seu login</h3>
-            {{ form.csrf_token }}
-            
-            {{ form.login_nome.label() }}
+<div class="conteudo">
+    <form action="" method="post" class="formulario">
+        <h3>Faça seu login</h3>
+
+        <!-- Mensagens flash (sucesso, erro, etc.) -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} mt-2">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Erros de validação dos campos -->
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger mt-2">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <!-- Token CSRF -->
+        {{ form.csrf_token }}
+
+        <!-- Campo Nome de Login -->
+        <div class="form-group mt-2">
+            {{ form.login_nome.label(class="form-label") }}
             {{ form.login_nome(class="form-control") }}
-            
-            {{ form.senha.label() }}
+        </div>
+
+        <!-- Campo Senha -->
+        <div class="form-group mt-2">
+            {{ form.senha.label(class="form-label") }}
             {{ form.senha(class="form-control") }}
+        </div>
 
-            {{ form.btnSubmit(class="btn btn-primary col-12 mt-3") }}
-
-        
-        </form>
-    </div>
+        <!-- Botão de Login -->
+        <div class="form-group mt-3">
+            {{ form.btnSubmit(class="btn btn-primary col-12") }}
+        </div>
+    </form>
+</div>
 {% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="formulario">
+    <h2>Retirar Estoque: {{ produto.nome }}</h2>
+    <p>Quantidade atual: {{ produto.quantidade }}</p>
+
+    <form method="POST">
+        <label for="quantidade_retirada">Quantidade a retirar:</label>
+        <input type="number" name="quantidade_retirada" min="1" required>
+
+        <button type="submit" class="botao">Retirar</button>
+        <a href="{{ url_for('produtos') }}" class="btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
