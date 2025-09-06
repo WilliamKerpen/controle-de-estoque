@@ -27,6 +27,7 @@ def homepage():
 
 # PÁGINAS GERAIS
 @app.route('/menu/')
+@login_required
 def menu():
     # Buscar produtos com estoque abaixo do mínimo
     produtos_alerta = Produto.query.filter(Produto.quantidade < Produto.quantidade_minima).all()
@@ -40,6 +41,13 @@ def wk():
 def ajuda():
     return render_template('ajuda.html')
 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Você saiu da sua conta com sucesso.', 'info')
+    return redirect(url_for('homepage'))
+
 
 # USUÁRIOS
 @app.route('/admin/usuarios/', methods=['GET', 'POST'])
@@ -49,7 +57,7 @@ def gerenciar_usuarios():
         abort(403)
 
     form = UserForm()
-    usuarios = User.query.order_by(User.nome.asc()).all()
+    usuarios = User.query.filter_by(ativo=True).order_by(User.nome.asc()).all()
 
     if form.validate_on_submit():
         try:
@@ -85,6 +93,17 @@ def editar_usuario(id):
 
     return render_template('editar_usuario.html', form=form, usuario=usuario)
 
+@app.route('/admin/usuarios/<int:id>/remover', methods=['GET', 'POST'])
+@login_required
+def remover_usuario(id):
+    if not current_user.admin:
+        abort(403)
+
+    usuario = User.query.get_or_404(id)
+    usuario.ativo = False
+    db.session.commit()
+    flash('Usuário removido com sucesso.', 'info')
+    return redirect(url_for('gerenciar_usuarios'))
 
 # PRODUTOS
 @app.route('/produtos/', methods=['GET', 'POST'])

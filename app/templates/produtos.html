@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<a href="{{ url_for('cadastrar_produto') }}" class="botao novo-produto">Novo Produto</a>
-
-<div class="formulario">
+<div class="formulario expandida">
     <h2>Produtos em Estoque</h2>
 
     <!-- Formulário de busca -->
     <form method="GET" action="{{ url_for('produtos') }}">
         <label for="busca">Buscar produto:</label>
         <input type="text" name="busca" id="busca" placeholder="Digite o nome do produto">
-        <button type="submit" class="botao">Buscar</button>
+        <button type="submit" class="botao pequeno">Buscar</button>
     </form>
 
     <hr>
@@ -23,7 +21,7 @@
                 <th>Quantidade</th>
                 <th>Qtd. Mínima</th>
                 <th>Descrição</th>
-                <th>Ações</th>
+                <th colspan="3">Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -35,7 +33,11 @@
                 <td>{{ produto.descricao[:25] }}{{ '...' if produto.descricao|length > 25 else '' }}</td>
                 <td>
                     <a href="{{ url_for('adicionar_produto', id=produto.id) }}" class="btn-secondary">Adicionar</a>
+                </td>
+                <td>
                     <a href="{{ url_for('retirar_produto', id=produto.id) }}" class="btn-secondary">Retirar</a>
+                </td>
+                <td>
                     <a href="{{ url_for('editar_produto', id=produto.id) }}" class="btn-secondary">Editar</a>
                 </td>
             </tr>

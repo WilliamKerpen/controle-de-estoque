@@ -7,22 +7,40 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <header id="menu_superior">
-        <div class="header-content">
+    {% if request.endpoint != 'index' %}
+    <header class="navbar">
+        <div class="navbar-container">
+            <a href="{{ url_for('menu') }}" class="logo">Controle de Estoque</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('menu') }}">Menu</a></li>
+                    <li><a href="{{ url_for('produtos') }}">Produtos</a></li>
+                    <li><a href="{{ url_for('cadastrar_produto') }}" class="botao pequeno">Novo Produto</a></li>
+                    <li><a href="{{ url_for('logout') }}" class="logout">Sair</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    {% endif %}
+
+    <div id="container">
+        {% block content %}{% endblock %}
+        
+    </div>
+
+    <!-- Footer -->
+    <footer id="menu_inferior">
+        <div class="footer-content">
             <a href="/"> 
                 <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
             </a>
             <nav>
-                <ul class="nav_header">
+                <ul class="nav_footer">
                     <li><a href="{{ url_for('wk') }}">Sobre Nós</a></li>
                     <li><a href="{{ url_for('ajuda') }}">Ajuda</a></li>   
                 </ul>
             </nav>
         </div>
-    </header>
-
-    <div id="container">
-        {% block content %}{% endblock %}
-    </div>
+    </footer>
 </body>
 </html>

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <div class="dashboard">
     <h1>Bem-vindo {{ current_user.login_nome }}, ao Painel de Controle</h1>
     <p>Escolha uma das opções abaixo:</p>
@@ -13,7 +14,7 @@
             </a>
 
             <a href="{{ url_for('ver_logs') }}" class="dashboard-card">
-                <img src="{{ url_for('static', filename='images/icon_reports.svg') }}" alt="Relatórios">
+                <img src="{{ url_for('static', filename='images/icon_logs.svg') }}" alt="Logs">
                 <span>Ver Logs</span>
             </a>
         {% endif %}

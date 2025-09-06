@@ -3,13 +3,16 @@
 {% block content %}
 <div class="formulario">
     <h2>Adicionar Estoque: {{ produto.nome }}</h2>
+    <p>Quantidade atual: {{ produto.quantidade }}</p>
 
     <form method="POST">
         <label for="quantidade_adicional">Quantidade a adicionar:</label>
         <input type="number" name="quantidade_adicional" min="1" required>
 
-        <button type="submit" class="botao">Adicionar</button>
-        <a href="{{ url_for('produtos') }}" class="btn-secondary">Cancelar</a>
+        <div class="botoes-lado">
+            <button type="submit" class="botao">Adicionar</button>
+            <a href="{{ url_for('produtos') }}" class="btn-secondary">Cancelar</a>
+        <div>
     </form>
 </div>
-{% endblock %}
+{% endblock %}  

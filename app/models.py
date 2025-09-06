@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
     login_nome = db.Column(db.String, nullable=False)
     senha = db.Column(db.String, nullable=True)
     admin = db.Column(db.Boolean, nullable=False, default=False)
+    ativo = db.Column(db.Boolean, nullable=False, default=True)
 
     __table_args__ = (
         db.UniqueConstraint("login_nome", name="uq_user_login_nome"),

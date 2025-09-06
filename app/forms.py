@@ -14,9 +14,9 @@ class UserForm(FlaskForm):
     sobrenome = StringField('Sobrenome', validators=[DataRequired()])
     login_nome = StringField('Nome de Login', validators=[DataRequired()])
     senha = PasswordField('Senha', validators=[DataRequired()])
-    confirmacao_senha = PasswordField('Senha', validators=[DataRequired(), EqualTo('senha')])
+    confirmacao_senha = PasswordField('Confirme a Senha', validators=[DataRequired(), EqualTo('senha',message='As senhas devem coincidir.')]) 
     admin = BooleanField('Administrador')
-    btnSubmit = SubmitField('Cadastrar')
+    btnSubmit = SubmitField('Salvar')
 
     def validate_login_nome(self, field):
         if User.query.filter_by(login_nome=field.data).first():

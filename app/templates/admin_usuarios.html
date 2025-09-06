@@ -1,10 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %} 
-    <div>
-        <a href="{{url_for('menu')}}">Menu Inicial</a>
-    </div>
-    
+   
     <div class="formulario">       
 
         <h2>Gerenciar Usuários</h2>
@@ -32,6 +29,7 @@
                     <th>Login</th>
                     <th>Admin</th>
                     <th>Ações</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -43,6 +41,13 @@
                     <td>
                         <a href="{{ url_for('editar_usuario', id=usuario.id) }}">Editar</a>
                     </td>
+                    <td>
+                        <div class="botoes-acoes">
+                            <a href="{{ url_for('remover_usuario', id=usuario.id) }}" class="btn-remover" onclick="return confirm('Deseja realmente remover este usuário?')">
+                                Remover
+                            </a>
+                    </div>
+                    </td
                 </tr>
                 {% endfor %}
             </tbody>

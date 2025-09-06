@@ -4,10 +4,18 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
     font-family: 'Trebuchet MS', sans-serif;
     background-color: #e8f1f9;
     min-width: 370px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* O container cresce para empurrar o footer */
+#container {
+    flex: 1;
 }
 
 header {
@@ -68,8 +76,11 @@ nav a:hover {
     margin-bottom: 20px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 500px;
+    max-width: 1000px; /* ou remova completamente o max-width */
+    margin-left: auto;
+    margin-right: auto;
 }
+
 
 .formulario h2 {
     margin-bottom: 15px;
@@ -232,4 +243,220 @@ table td a {
     color: #a94442;
     font-weight: bold;
     margin-bottom: 8px;
+}
+
+.botoes-acoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.botoes-acoes .botao {
+    background-color: #7b68ee;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.botoes-acoes .btn-remover {
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.botoes-acoes .btn-remover:hover {
+    background-color: #c82333;
+}
+
+/* Botão pequeno */
+.botao.pequeno {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+/* Container do topo */
+.topo-produtos {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    padding: 0 20px;
+}
+
+/* Tabela dentro do formulário */
+.formulario table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f0f0f0; /* mesmo fundo da div */
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.formulario th, .formulario td {
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+
+.formulario th {
+    background-color: #e0e0e0;
+    font-weight: bold;
+}
+
+.formulario td a {
+    margin-right: 5px;
+}
+
+/* Botão pequeno no topo */
+.topo-produtos {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    margin-bottom: -10px;
+}
+
+.botao.pequeno {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+}
+
+/* Expande a div para acomodar a tabela */
+.formulario.expandida {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto 20px auto;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Tabela dentro da div */
+.formulario.expandida table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f0f0f0;
+    margin-top: 20px;
+}
+
+.formulario.expandida th, .formulario.expandida td {
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+
+.formulario.expandida th {
+    background-color: #e0e0e0;
+    font-weight: bold;
+}
+
+/* Navbar */
+.navbar {
+    background-color: rgba(31, 37, 47, 0.9);
+    padding: 10px 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+}
+
+.navbar-container {
+    max-width: 1000px; /* acompanha largura do .formulario */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-links a {
+    background-color: #d9d7ef;
+    color: #57449a;
+    padding: 6px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    background-color: #57449a;
+    color: #fff;
+}
+
+/* Botão sair diferenciado */
+.nav-links .logout {
+    background-color: #dc3545;
+    color: #fff;
+}
+.nav-links .logout:hover {
+    background-color: #c82333;
+}
+
+/* Footer */
+footer {
+    background-color: rgba(31, 37, 47, 0.85);
+    padding: 15px 20px;
+    margin-top: 40px;
+}
+
+.footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer .logo {
+    height: 40px;
+}
+
+.nav_footer {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav_footer a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav_footer a:hover {
+    text-decoration: underline;
+}
+.botoes-lado {
+    display: flex;
+    gap: 10px; /* espaço entre os botões */
+    margin-top: 15px;
+}
+
+.botoes-lado .botao,
+.botoes-lado .btn-secondary {
+    margin: 0; /* remove margens extras */
 }
